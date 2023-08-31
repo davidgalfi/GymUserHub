@@ -1,6 +1,7 @@
 package com.backend.guhbackend.gymuser;
 
 import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
+import com.backend.guhbackend.gymuser.utils.ConvertingClass;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class Gymuser {
     private String email;
     private LocalDate dob; // Date of Birth
     private LocalDate registrationDate;
+    @Convert(converter = ConvertingClass.class)
     private HashMap<Integer, LocalDate> purchaseDateMap;
     @Transient // Table does not contain this data
     private Integer daysAllowed;
@@ -43,6 +45,7 @@ public class Gymuser {
         this.email = email;
         this.dob = dob;
         this.registrationDate = registrationDate;
+        setAge();
     }
 
     public Gymuser(String name,
@@ -55,6 +58,8 @@ public class Gymuser {
         this.dob = dob;
         this.registrationDate = registrationDate;
         this.purchaseDateMap = purchaseDateMap;
+        setAge();
+        setDaysAllowed();
     }
 
     public Long getId() {
@@ -117,7 +122,7 @@ public class Gymuser {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge() {
         this.age = ArithmeticUtils.ageCalculate(dob);
     }
 

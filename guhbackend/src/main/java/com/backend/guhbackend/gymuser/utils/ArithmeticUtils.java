@@ -21,6 +21,6 @@ public class ArithmeticUtils {
     }
 
     public static Integer ageCalculate(LocalDate dob){
-        return Period.between(LocalDate.now(), dob).getYears();
+        return Period.between(dob, LocalDate.now()).getYears();
     }
 }
