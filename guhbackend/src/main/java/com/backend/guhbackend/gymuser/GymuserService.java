@@ -10,24 +10,18 @@ import java.util.stream.Collectors;
 public class GymuserService {
 
     private final GymuserRepository gymuserRepository;
+    private final GymuserDTOMapper gymuserDTOMapper;
 
     @Autowired
-    public GymuserService(GymuserRepository gymuserRepository){
+    public GymuserService(GymuserRepository gymuserRepository,
+                          GymuserDTOMapper gymuserDTOMapper){
         this.gymuserRepository = gymuserRepository;
+        this.gymuserDTOMapper = gymuserDTOMapper;
     }
 
     public List<GymuserDTO> getGymUsers(){
         return gymuserRepository.findAll()
                 .stream()
-                .map(gymuser -> new GymuserDTO(
-                        gymuser.getId(),
-                        gymuser.getName(),
-                        gymuser.getEmail(),
-                        gymuser.getDob(),
-                        gymuser.getRegistrationDate(),
-                        gymuser.getPurchaseDateMap(),
-                        gymuser.getDaysAllowed(),
-                        gymuser.getAge()
-                )).collect(Collectors.toList());
+                .map(gymuserDTOMapper).collect(Collectors.toList());
     }
 }
