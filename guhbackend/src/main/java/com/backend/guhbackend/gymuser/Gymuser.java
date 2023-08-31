@@ -35,6 +35,7 @@ public class Gymuser {
     private Integer discount;
 
     public Gymuser() {
+
     }
 
     public Gymuser(String name,
@@ -109,7 +110,6 @@ public class Gymuser {
     public void setPurchaseDateMap(HashMap<Integer, LocalDate> purchaseDateMap) {
         this.purchaseDateMap = purchaseDateMap;
     }
-
     public Integer getDaysAllowed() {
         return daysAllowed;
     }
