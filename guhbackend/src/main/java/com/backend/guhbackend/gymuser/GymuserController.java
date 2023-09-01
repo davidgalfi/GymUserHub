@@ -30,4 +30,10 @@ public class GymuserController {
     public void deleteGymUser(@PathVariable Long id){
         gymuserService.deleteGymUser(id);
     }
+
+    @PutMapping(path = "/update/{id}")
+    public void updateGymUser(@PathVariable Long id, @RequestBody GymuserUpdateRequest gymuserUpdateRequest)
+            throws GymuserAlreadyRegisteredException, InvalidTicketDateException {
+        gymuserService.updateGymUser(id, gymuserUpdateRequest);
+    }
 }
