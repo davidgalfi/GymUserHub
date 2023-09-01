@@ -20,21 +20,18 @@ public class GymuserDTO{
                       String email,
                       LocalDate dob,
                       LocalDate registrationDate,
-                      HashMap<Integer, LocalDate> purchaseDateMap,
-                      Integer daysAllowed,
-                      Integer age) {
+                      HashMap<Integer, LocalDate> purchaseDateMap) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.dob = dob;
         this.registrationDate = registrationDate;
         this.purchaseDateMap = purchaseDateMap;
-
-        // Calculate age
-        setAge();
-        // Calculate days allowed
         setDaysAllowed();
+        setAge();
     }
+
+
 
     public Long getId() {
         return id;

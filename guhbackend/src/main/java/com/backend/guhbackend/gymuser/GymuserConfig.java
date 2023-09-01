@@ -15,16 +15,16 @@ public class GymuserConfig {
     @Bean
     CommandLineRunner commandLineRunner(GymuserRepository gymuserRepository){
         return args -> {
-            HashMap<Integer, LocalDate> hashMap_1 = new HashMap<>();
+            /*HashMap<Integer, LocalDate> hashMap_1 = new HashMap<>();
             HashMap<Integer, LocalDate> hashMap_2 = new HashMap<>();
             hashMap_1.put(10,LocalDate.of(2023, Month.AUGUST, 26));
             hashMap_2.put(2,LocalDate.of(2023, Month.AUGUST, 30));
-            /*String name,
+            String name,
                    String email,
                    LocalDate dob,
                    LocalDate registrationDate,
                    HashMap<Integer, LocalDate> purchaseDateMap*/
-            Gymuser david = new Gymuser(
+            /*Gymuser david = new Gymuser(
                     "David",
                     "david@gmail.com",
                     LocalDate.of(2002, Month.JUNE, 8),
@@ -38,7 +38,7 @@ public class GymuserConfig {
                     LocalDate.of(2023, Month.AUGUST, 20),
                     hashMap_2
             );
-            gymuserRepository.saveAll(List.of(david, alex));
+            gymuserRepository.saveAll(List.of(david, alex));*/
         };
     }
 }

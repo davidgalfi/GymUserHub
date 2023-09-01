@@ -15,8 +15,6 @@ public class GymuserDTOMapper implements Function<Gymuser, GymuserDTO> {
                 gymuser.getEmail(),
                 gymuser.getDob(),
                 gymuser.getRegistrationDate(),
-                gymuser.getPurchaseDateMap(),
-                gymuser.getDaysAllowed(),
-                gymuser.getAge());
+                gymuser.getPurchaseDateMap());
     }
 }

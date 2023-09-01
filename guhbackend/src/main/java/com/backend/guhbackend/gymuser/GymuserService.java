@@ -13,6 +13,7 @@ public class GymuserService {
     private final GymuserRepository gymuserRepository;
     private final GymuserDTOMapper gymuserDTOMapper;
 
+
     @Autowired
     public GymuserService(GymuserRepository gymuserRepository,
                           GymuserDTOMapper gymuserDTOMapper){
