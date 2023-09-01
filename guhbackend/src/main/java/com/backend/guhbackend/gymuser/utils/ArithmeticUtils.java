@@ -14,7 +14,7 @@ public class ArithmeticUtils {
         Integer registeredDays = (Integer) CollectionFunctions.getLastEntryKey(map);
         if(registeredDays != null && registeredTime != null){
             Integer timeElapsed = Period.between(registeredTime, LocalDate.now()).getDays();
-            return registeredDays - timeElapsed;
+            return registeredDays - timeElapsed + 1;
         } else {
             return 0;
         }
