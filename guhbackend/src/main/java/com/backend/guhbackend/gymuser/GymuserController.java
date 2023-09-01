@@ -1,9 +1,7 @@
 package com.backend.guhbackend.gymuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,10 @@ public class GymuserController {
     @GetMapping(path = "/get")
     public List<GymuserDTO> getGymUsers(){
         return gymuserService.getGymUsers();
+    }
+
+    @PostMapping(path = "/create")
+    public void registerGymUser(@RequestBody GymuserRegistrationRequest gymuserRegistrationRequest) throws GymuserAlreadyRegisteredException {
+        gymuserService.registerGymUser(gymuserRegistrationRequest);
     }
 }
