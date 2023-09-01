@@ -25,4 +25,9 @@ public class GymuserController {
     public void registerGymUser(@RequestBody GymuserRegistrationRequest gymuserRegistrationRequest) throws GymuserAlreadyRegisteredException {
         gymuserService.registerGymUser(gymuserRegistrationRequest);
     }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteGymUser(@PathVariable Long id){
+        gymuserService.deleteGymUser(id);
+    }
 }

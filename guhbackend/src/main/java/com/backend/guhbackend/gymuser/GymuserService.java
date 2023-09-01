@@ -42,4 +42,12 @@ public class GymuserService {
 
         gymuserRepository.save(gymuser);
     }
+
+    public void deleteGymUser(Long id) {
+        Optional<Gymuser> gymuserOptional = gymuserRepository.findById(id);
+        if(gymuserOptional.isPresent()){
+            Gymuser gymuser = gymuserOptional.get();
+            gymuserRepository.delete(gymuser);
+        };
+    }
 }
