@@ -70,6 +70,7 @@ public class GymuserService {
        !Objects.equals(gymuser.getEmail(), gymuserUpdateRequest.email())){
             Optional<Gymuser> gymuserOptional = gymuserRepository.findGymuserByEmail(gymuserUpdateRequest.email());
             if(gymuserOptional.isPresent()){
+                // TODO: Resolve error message problem
                 throw new GymuserAlreadyRegisteredException("Email already registered!");
             }
             gymuser.setEmail(gymuserUpdateRequest.email());
