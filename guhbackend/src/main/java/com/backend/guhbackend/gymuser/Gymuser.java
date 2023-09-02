@@ -4,7 +4,6 @@ import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
 import com.backend.guhbackend.gymuser.utils.CollectionFunctions;
 import com.backend.guhbackend.gymuser.utils.ConvertingClass;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -62,7 +61,7 @@ public class Gymuser {
         this.email = email;
         this.dob = dob;
         this.registrationDate = registrationDate;
-        setPurchaseDateMap(purchaseDateMap);
+        this.purchaseDateMap = purchaseDateMap;
         setAge();
         setDaysAllowed();
     }
@@ -109,7 +108,7 @@ public class Gymuser {
 
     public HashMap<Integer, LocalDate> getPurchaseDateMap() {
         Optional<Map.Entry<Integer, LocalDate>> purchaseDateOptional =
-                CollectionFunctions.getLastEntry(this.purchaseDateMap);
+                CollectionFunctions.getFirstEntry(this.purchaseDateMap);
         HashMap<Integer, LocalDate> purchaseDate = new HashMap<Integer, LocalDate>();
         purchaseDateOptional.ifPresent(entry -> purchaseDate.put(entry.getKey(), entry.getValue()));
         return purchaseDate;

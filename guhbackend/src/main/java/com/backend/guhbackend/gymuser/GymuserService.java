@@ -78,7 +78,7 @@ public class GymuserService {
 
         if(gymuserUpdateRequest.purchaseDateMap()!= null &&
         gymuserUpdateRequest.purchaseDateMap().size() > 0){
-            if(ArithmeticUtils.daysAllowedToUseGym(gymuser.getPurchaseDateMap()) == 0){
+            if(ArithmeticUtils.daysAllowedToUseGym(gymuserUpdateRequest.purchaseDateMap()) == 0){
                 throw new InvalidTicketDateException("Invalid ticket date. Please enter a date that allows more than 0 days.");
             }
             gymuser.setPurchaseDateMap(gymuserUpdateRequest.purchaseDateMap());
