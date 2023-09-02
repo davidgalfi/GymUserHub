@@ -6,7 +6,7 @@ import com.backend.guhbackend.gymuser.utils.ConvertingClass;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class Gymuser {
     private LocalDate dob; // Date of Birth
     private LocalDate registrationDate;
     @Convert(converter = ConvertingClass.class)
-    private HashMap<Integer, LocalDate> purchaseDateMap;
+    private LinkedHashMap<Integer, LocalDate> purchaseDateMap;
     @Transient // Table does not contain this data
     private Integer daysAllowed;
     @Transient // Table does not contain this data
@@ -56,7 +56,7 @@ public class Gymuser {
                    String email,
                    LocalDate dob,
                    LocalDate registrationDate,
-                   HashMap<Integer, LocalDate> purchaseDateMap) {
+                   LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -106,17 +106,17 @@ public class Gymuser {
         this.registrationDate = registrationDate;
     }
 
-    public HashMap<Integer, LocalDate> getPurchaseDateMap() {
+    public LinkedHashMap<Integer, LocalDate> getPurchaseDateMap() {
         Optional<Map.Entry<Integer, LocalDate>> purchaseDateOptional =
-                CollectionFunctions.getFirstEntry(this.purchaseDateMap);
-        HashMap<Integer, LocalDate> purchaseDate = new HashMap<Integer, LocalDate>();
+                CollectionFunctions.getLastEntry(this.purchaseDateMap);
+        LinkedHashMap<Integer, LocalDate> purchaseDate = new LinkedHashMap<Integer, LocalDate>();
         purchaseDateOptional.ifPresent(entry -> purchaseDate.put(entry.getKey(), entry.getValue()));
         return purchaseDate;
     }
-    public HashMap<Integer, LocalDate> getAllPurchaseDateMap() {
+    public LinkedHashMap<Integer, LocalDate> getAllPurchaseDateMap() {
         return this.purchaseDateMap;
     }
-    public void setPurchaseDateMap(HashMap<Integer, LocalDate> purchaseDateMap) {
+    public void setPurchaseDateMap(LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
         this.purchaseDateMap.putAll(purchaseDateMap);
     }
     public Integer getDaysAllowed() {

@@ -1,14 +1,11 @@
 package com.backend.guhbackend.gymuser.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class CollectionFunctions {
 
 
-    public static <K, V> Optional<Map.Entry<K, V>> getLastEntry(HashMap<K, V> map) {
+    public static <K, V> Optional<Map.Entry<K, V>> getLastEntry(LinkedHashMap<K, V> map) {
         if (map.isEmpty()) {
             return Optional.empty();
         } else {
@@ -18,7 +15,7 @@ public class CollectionFunctions {
         }
     }
 
-    public static <K, V> Object getLastEntryValue(HashMap<K, V> map){
+    public static <K, V> Object getLastEntryValue(LinkedHashMap<K, V> map){
         Optional<Map.Entry<K, V>> lastEntryOptional = getLastEntry(map);
         if(lastEntryOptional.isPresent()){
             Map.Entry<K, V> lastEntry = getLastEntry(map).get();
@@ -28,7 +25,7 @@ public class CollectionFunctions {
         }
     }
 
-    public static <K, V> Object getLastEntryKey(HashMap<K, V> map){
+    public static <K, V> Object getLastEntryKey(LinkedHashMap<K, V> map){
         Optional<Map.Entry<K, V>> lastEntryOptional = getLastEntry(map);
         if(lastEntryOptional.isPresent()){
             Map.Entry<K, V> lastEntry = getLastEntry(map).get();

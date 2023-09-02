@@ -8,14 +8,15 @@ import jakarta.persistence.Converter;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 @Converter
-public class ConvertingClass implements AttributeConverter<HashMap<Integer, LocalDate>, String> {
+public class ConvertingClass implements AttributeConverter<LinkedHashMap<Integer, LocalDate>, String> {
 
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Override
-    public String convertToDatabaseColumn(HashMap<Integer, LocalDate> attribute) {
+    public String convertToDatabaseColumn(LinkedHashMap<Integer, LocalDate> attribute) {
         try {
             return objectMapper.writeValueAsString(attribute);
         } catch (Exception e) {
@@ -33,10 +34,10 @@ public class ConvertingClass implements AttributeConverter<HashMap<Integer, Loca
     }*/
 
     @Override
-    public HashMap<Integer, LocalDate> convertToEntityAttribute(String dbData) {
+    public LinkedHashMap<Integer, LocalDate> convertToEntityAttribute(String dbData) {
         try {
-            TypeReference<HashMap<Integer, LocalDate>> typeReference =
-                    new TypeReference<HashMap<Integer, LocalDate>>() {};
+            TypeReference<LinkedHashMap<Integer, LocalDate>> typeReference =
+                    new TypeReference<LinkedHashMap<Integer, LocalDate>>() {};
             return objectMapper.readValue(dbData, typeReference);
         } catch (Exception e) {
             throw new RuntimeException("Error converting JSON to HashMap", e);
