@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,7 +25,23 @@ public class GymuserService {
         this.gymuserDTOMapper = gymuserDTOMapper;
     }
 
-    public List<GymuserDTO> getGymUsers(){
+    public List<GymuserDTO> getGymUsers(Long id, String email){
+        if(id != null){
+            Optional<Gymuser> gymuserOptional = gymuserRepository.findById(id);
+            if(gymuserOptional.isEmpty()){
+                throw new IllegalStateException("Gymuser with " + id + " not found");
+            }
+            return Collections.singletonList(gymuserDTOMapper.apply(gymuserOptional.get()));
+        }
+
+        if(email != null){
+            Optional<Gymuser> gymuserOptional = gymuserRepository.findGymuserByEmail(email);
+            if(gymuserOptional.isEmpty()){
+                throw new IllegalStateException("Gymuser with " + email + " not found");
+            }
+            return Collections.singletonList(gymuserDTOMapper.apply(gymuserOptional.get()));
+        }
+
         return gymuserRepository.findAll()
                 .stream()
                 .map(gymuserDTOMapper).collect(Collectors.toList());
@@ -57,7 +74,9 @@ public class GymuserService {
     @Transactional
     public void updateGymUser(Long id, GymuserUpdateRequest gymuserUpdateRequest)
             throws GymuserAlreadyRegisteredException, InvalidTicketDateException {
-        Gymuser gymuser = gymuserRepository.findById(id).orElseThrow(() -> new IllegalStateException("Gymuser:" + id + " not found"));
+        Gymuser gymuser = gymuserRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalStateException("Gymuser with " + id + " not found"));
 
         if(gymuserUpdateRequest.name()!= null &&
         gymuserUpdateRequest.name().length() > 0 &&

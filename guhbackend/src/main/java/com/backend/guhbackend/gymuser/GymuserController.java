@@ -17,8 +17,8 @@ public class GymuserController {
     }
 
     @GetMapping(path = "/get")
-    public List<GymuserDTO> getGymUsers(){
-        return gymuserService.getGymUsers();
+    public List<GymuserDTO> getGymUsers(@RequestParam(required = false) Long id,@RequestParam(required = false) String email){
+        return gymuserService.getGymUsers(id, email);
     }
 
     @PostMapping(path = "/create")
