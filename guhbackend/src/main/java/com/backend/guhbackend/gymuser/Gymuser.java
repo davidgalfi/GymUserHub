@@ -1,8 +1,8 @@
 package com.backend.guhbackend.gymuser;
 
-import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
-import com.backend.guhbackend.gymuser.utils.CollectionFunctions;
-import com.backend.guhbackend.gymuser.utils.ConvertingClass;
+import com.backend.guhbackend.utils.ArithmeticUtils;
+import com.backend.guhbackend.utils.CollectionFunctions;
+import com.backend.guhbackend.utils.ConvertingClass;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

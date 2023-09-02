@@ -1,6 +1,6 @@
 package com.backend.guhbackend.gymuser;
 
-import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
+import com.backend.guhbackend.utils.ArithmeticUtils;
 
 import java.time.LocalDate;
 import java.util.LinkedHashMap;

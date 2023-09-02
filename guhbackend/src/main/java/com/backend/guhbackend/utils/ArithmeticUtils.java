@@ -1,4 +1,4 @@
-package com.backend.guhbackend.gymuser.utils;
+package com.backend.guhbackend.utils;
 
 
 import java.time.LocalDate;
@@ -21,5 +21,9 @@ public class ArithmeticUtils {
 
     public static Integer ageCalculate(LocalDate dob){
         return Period.between(dob, LocalDate.now()).getYears();
+    }
+
+    public static Integer yearCalculator(LocalDate date){
+        return Period.between(date, LocalDate.now()).getYears();
     }
 }

@@ -1,4 +1,4 @@
-package com.backend.guhbackend.gymuser.utils;
+package com.backend.guhbackend.utils;
 
 import java.util.*;
 

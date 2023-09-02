@@ -1,4 +1,4 @@
-package com.backend.guhbackend.gymuser.utils;
+package com.backend.guhbackend.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
