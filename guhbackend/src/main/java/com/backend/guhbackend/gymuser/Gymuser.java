@@ -1,11 +1,15 @@
 package com.backend.guhbackend.gymuser;
 
 import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
+import com.backend.guhbackend.gymuser.utils.CollectionFunctions;
 import com.backend.guhbackend.gymuser.utils.ConvertingClass;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Entity // Telling Java that this class is working with database
 @Table(name="gymuser") // Setting the table
@@ -14,7 +18,7 @@ public class Gymuser {
     @SequenceGenerator(
             name = "sequence_gymuser",
             sequenceName = "sequence_gymuser",
-            allocationSize = 1 // Tells how many Id being generated in one call
+            allocationSize = 1 // Tells how many ID being generated in one call
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -58,7 +62,7 @@ public class Gymuser {
         this.email = email;
         this.dob = dob;
         this.registrationDate = registrationDate;
-        this.purchaseDateMap = purchaseDateMap;
+        setPurchaseDateMap(purchaseDateMap);
         setAge();
         setDaysAllowed();
     }
@@ -104,11 +108,17 @@ public class Gymuser {
     }
 
     public HashMap<Integer, LocalDate> getPurchaseDateMap() {
-        return purchaseDateMap;
+        Optional<Map.Entry<Integer, LocalDate>> purchaseDateOptional =
+                CollectionFunctions.getLastEntry(this.purchaseDateMap);
+        HashMap<Integer, LocalDate> purchaseDate = new HashMap<Integer, LocalDate>();
+        purchaseDateOptional.ifPresent(entry -> purchaseDate.put(entry.getKey(), entry.getValue()));
+        return purchaseDate;
     }
-
+    public HashMap<Integer, LocalDate> getAllPurchaseDateMap() {
+        return this.purchaseDateMap;
+    }
     public void setPurchaseDateMap(HashMap<Integer, LocalDate> purchaseDateMap) {
-        this.purchaseDateMap = purchaseDateMap;
+        this.purchaseDateMap.putAll(purchaseDateMap);
     }
     public Integer getDaysAllowed() {
         return daysAllowed;
