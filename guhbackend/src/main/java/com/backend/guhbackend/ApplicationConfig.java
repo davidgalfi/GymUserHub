@@ -51,9 +51,7 @@ public class ApplicationConfig {
             private String phone;
             private String workingType;
             private LocalDate dob;
-            private LocalDate startedWork;
-            private Integer age;
-            private Integer workingTime;*/
+            private LocalDate startedWork;*/
 
             Gymworker gymworker_test_1 = new Gymworker(
                     "Test_1",
