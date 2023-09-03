@@ -1,20 +1,19 @@
-package com.backend.guhbackend.gymuser.utils;
+package com.backend.guhbackend.utils;
 
-
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ArithmeticUtils {
 
-    public static Integer daysAllowedToUseGym(HashMap<Integer, LocalDate> map){
+    public static Integer daysAllowedToUseGym(LinkedHashMap<Integer, LocalDate> map){
         LocalDate registeredTime = (LocalDate) CollectionFunctions.getLastEntryValue(map);
         Integer registeredDays = (Integer) CollectionFunctions.getLastEntryKey(map);
         if(registeredDays != null && registeredTime != null){
             Integer timeElapsed = Period.between(registeredTime, LocalDate.now()).getDays();
-            return registeredDays - timeElapsed + 1;
+            int daysAllowed = registeredDays - timeElapsed;
+            return Math.max(daysAllowed, 0);
         } else {
             return 0;
         }
@@ -22,5 +21,9 @@ public class ArithmeticUtils {
 
     public static Integer ageCalculate(LocalDate dob){
         return Period.between(dob, LocalDate.now()).getYears();
+    }
+
+    public static Integer yearCalculator(LocalDate date){
+        return Period.between(date, LocalDate.now()).getYears();
     }
 }

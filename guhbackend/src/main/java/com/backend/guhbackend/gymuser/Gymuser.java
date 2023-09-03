@@ -1,11 +1,14 @@
 package com.backend.guhbackend.gymuser;
 
-import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
-import com.backend.guhbackend.gymuser.utils.ConvertingClass;
+import com.backend.guhbackend.utils.ArithmeticUtils;
+import com.backend.guhbackend.utils.CollectionFunctions;
+import com.backend.guhbackend.utils.ConvertingClass;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Entity // Telling Java that this class is working with database
 @Table(name="gymuser") // Setting the table
@@ -14,7 +17,7 @@ public class Gymuser {
     @SequenceGenerator(
             name = "sequence_gymuser",
             sequenceName = "sequence_gymuser",
-            allocationSize = 1 // Tells how many Id being generated in one call
+            allocationSize = 1 // Tells how many ID being generated in one call
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -26,7 +29,7 @@ public class Gymuser {
     private LocalDate dob; // Date of Birth
     private LocalDate registrationDate;
     @Convert(converter = ConvertingClass.class)
-    private HashMap<Integer, LocalDate> purchaseDateMap;
+    private LinkedHashMap<Integer, LocalDate> purchaseDateMap;
     @Transient // Table does not contain this data
     private Integer daysAllowed;
     @Transient // Table does not contain this data
@@ -53,7 +56,7 @@ public class Gymuser {
                    String email,
                    LocalDate dob,
                    LocalDate registrationDate,
-                   HashMap<Integer, LocalDate> purchaseDateMap) {
+                   LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -103,12 +106,18 @@ public class Gymuser {
         this.registrationDate = registrationDate;
     }
 
-    public HashMap<Integer, LocalDate> getPurchaseDateMap() {
-        return purchaseDateMap;
+    public LinkedHashMap<Integer, LocalDate> getPurchaseDateMap() {
+        Optional<Map.Entry<Integer, LocalDate>> purchaseDateOptional =
+                CollectionFunctions.getLastEntry(this.purchaseDateMap);
+        LinkedHashMap<Integer, LocalDate> purchaseDate = new LinkedHashMap<Integer, LocalDate>();
+        purchaseDateOptional.ifPresent(entry -> purchaseDate.put(entry.getKey(), entry.getValue()));
+        return purchaseDate;
     }
-
-    public void setPurchaseDateMap(HashMap<Integer, LocalDate> purchaseDateMap) {
-        this.purchaseDateMap = purchaseDateMap;
+    public LinkedHashMap<Integer, LocalDate> getAllPurchaseDateMap() {
+        return this.purchaseDateMap;
+    }
+    public void setPurchaseDateMap(LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
+        this.purchaseDateMap.putAll(purchaseDateMap);
     }
     public Integer getDaysAllowed() {
         return daysAllowed;

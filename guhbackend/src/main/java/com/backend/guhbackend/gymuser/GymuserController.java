@@ -17,12 +17,23 @@ public class GymuserController {
     }
 
     @GetMapping(path = "/get")
-    public List<GymuserDTO> getGymUsers(){
-        return gymuserService.getGymUsers();
+    public List<GymuserDTO> getGymUsers(@RequestParam(required = false) Long id,@RequestParam(required = false) String email){
+        return gymuserService.getGymUsers(id, email);
     }
 
     @PostMapping(path = "/create")
     public void registerGymUser(@RequestBody GymuserRegistrationRequest gymuserRegistrationRequest) throws GymuserAlreadyRegisteredException {
         gymuserService.registerGymUser(gymuserRegistrationRequest);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteGymUser(@PathVariable Long id){
+        gymuserService.deleteGymUser(id);
+    }
+
+    @PutMapping(path = "/update/{id}")
+    public void updateGymUser(@PathVariable Long id, @RequestBody GymuserUpdateRequest gymuserUpdateRequest)
+            throws GymuserAlreadyRegisteredException, InvalidTicketDateException {
+        gymuserService.updateGymUser(id, gymuserUpdateRequest);
     }
 }

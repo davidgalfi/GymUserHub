@@ -1,40 +1,56 @@
 package com.backend.guhbackend;
 
-import com.backend.guhbackend.gymuser.Gymuser;
+import com.backend.guhbackend.gymuser.*;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class GuhbackendApplicationTests {
 
+	private final GymuserController gymUserService;
+	private final GymuserRepository gymuserRepository;
+
+	@Autowired
+	GuhbackendApplicationTests(GymuserController gymUserService, GymuserRepository gymuserRepository) {
+		this.gymUserService = gymUserService;
+		this.gymuserRepository = gymuserRepository;
+	}
+
 	@Test
 	void contextLoads() {
 
-        /*String name,
-                   String email,
-                   LocalDate dob,
-                   LocalDate registrationDate,
-                   HashMap<Integer, LocalDate> purchaseDateMap*/
-
-		LocalDate dob = LocalDate.of(2002, Month.JUNE, 8);
-		String name = "david";
-		String email = "david@gmail.com";
-		LocalDate registrationDate = LocalDate.of(2022, Month.AUGUST, 15);
-		HashMap<Integer, LocalDate> purchaseDateMap = new HashMap<>();
-		purchaseDateMap.put(30, LocalDate.of(2023, Month.AUGUST, 26));
-
-
-		Gymuser gymuser = new Gymuser(name, email, dob, registrationDate, purchaseDateMap);
-
-		System.out.println("\n\n##############################");
-		System.out.println(gymuser);
-		System.out.println(gymuser.getAge());
-		System.out.println(gymuser.getDaysAllowed());
-		System.out.println("##############################\n\n");
 	}
+
+	@Test
+	public void testRegisterGymUser() throws GymuserAlreadyRegisteredException {
+		GymuserRegistrationRequest request = new GymuserRegistrationRequest("John", "john@gmail.com", LocalDate.of(1990, 1, 1), LocalDate.now(), new HashMap<>());
+		gymUserService.registerGymUser(request);
+		Optional<Gymuser> gymuserOptional = gymuserRepository.findGymuserByEmail("john@gmail.com");
+		assertTrue(gymuserOptional.isPresent());
+	}
+
+	@Test
+	public void testRegisterGymUserWithAlreadyRegisteredEmail() throws GymuserAlreadyRegisteredException {
+		GymuserRegistrationRequest request1 = new GymuserRegistrationRequest("John", "dave@gmail.com", LocalDate.of(1990, 1, 1), LocalDate.now(), new HashMap<>());
+		gymUserService.registerGymUser(request1);
+		GymuserRegistrationRequest request2 = new GymuserRegistrationRequest("Jane", "dave@gmail.com", LocalDate.of(1995, 1, 1), LocalDate.now(), new HashMap<>());
+
+		GymuserAlreadyRegisteredException exception = assertThrows(GymuserAlreadyRegisteredException.class, () -> gymUserService.registerGymUser(request2));
+		assertTrue(exception.getMessage().contains("Email already registered!"));
+	}
+
 
 }

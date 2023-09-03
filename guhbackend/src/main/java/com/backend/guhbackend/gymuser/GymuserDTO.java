@@ -1,9 +1,9 @@
 package com.backend.guhbackend.gymuser;
 
-import com.backend.guhbackend.gymuser.utils.ArithmeticUtils;
+import com.backend.guhbackend.utils.ArithmeticUtils;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class GymuserDTO{
     private Long id;
@@ -11,7 +11,7 @@ public class GymuserDTO{
     private String email;
     private LocalDate dob;
     private LocalDate registrationDate;
-    private HashMap<Integer, LocalDate> purchaseDateMap;
+    private LinkedHashMap<Integer, LocalDate> purchaseDateMap;
     private Integer daysAllowed;
     private Integer age;
 
@@ -20,7 +20,7 @@ public class GymuserDTO{
                       String email,
                       LocalDate dob,
                       LocalDate registrationDate,
-                      HashMap<Integer, LocalDate> purchaseDateMap) {
+                      LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -73,11 +73,11 @@ public class GymuserDTO{
         this.registrationDate = registrationDate;
     }
 
-    public HashMap<Integer, LocalDate> getPurchaseDateMap() {
+    public LinkedHashMap<Integer, LocalDate> getPurchaseDateMap() {
         return purchaseDateMap;
     }
 
-    public void setPurchaseDateMap(HashMap<Integer, LocalDate> purchaseDateMap) {
+    public void setPurchaseDateMap(LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
         this.purchaseDateMap = purchaseDateMap;
     }
 

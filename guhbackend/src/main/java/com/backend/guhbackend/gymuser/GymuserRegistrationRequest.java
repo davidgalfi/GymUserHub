@@ -1,12 +1,12 @@
 package com.backend.guhbackend.gymuser;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public record GymuserRegistrationRequest(String name,
                                          String email,
                                          LocalDate dob,
                                          LocalDate registrationDate,
-                                         HashMap<Integer, LocalDate> purchaseDateMap) {
+                                         LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
 
 }
