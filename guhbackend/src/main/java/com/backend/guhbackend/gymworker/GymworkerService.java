@@ -1,5 +1,6 @@
 package com.backend.guhbackend.gymworker;
 
+import jakarta.persistence.Transient;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,5 +71,71 @@ public class GymworkerService {
                 gymworkerRegistrationRequest.startedWork());
 
         gymworkerRepository.save(gymworker);
+    }
+
+    public void deleteGymworker(Long id, String email) {
+        if(id == null && email == null){
+            throw new IllegalStateException("No id or email provided!");
+        }
+        if(id != null){
+            Optional<Gymworker> worker = gymworkerRepository.findById(id);
+            if(worker.isEmpty()){
+                throw new IllegalStateException("Gym-worker with: " + id + " not found!");
+            }
+            gymworkerRepository.delete(worker.get());
+        }
+
+        if(email!= null){
+            Optional<Gymworker> worker = gymworkerRepository.findGymworkerByEmail(email);
+            if(worker.isEmpty()){
+                throw new IllegalStateException("Gym-worker with: " + email + " not found!");
+            }
+            gymworkerRepository.delete(worker.get());
+        }
+    }
+
+    @Transactional
+    public void updateGymworker(Long id, String email, GymworkerUpdateRequest gymworkerUpdateRequest) {
+        Gymworker gymworker = new Gymworker();
+
+        if(email != null){
+            gymworker = gymworkerRepository.findGymworkerByEmail(email)
+                    .orElseThrow(() -> new IllegalStateException("Could not find worker with email: " + email));
+        } else if(id != null){
+            gymworker = gymworkerRepository.findById(id)
+                   .orElseThrow(() -> new IllegalStateException("Could not find worker with id: " + id));
+        } else {
+            throw new IllegalStateException("No id or email provided!");
+        }
+
+        if(gymworkerUpdateRequest.name() != null
+                && gymworkerUpdateRequest.name().length() > 0) {
+            gymworker.setName(gymworkerUpdateRequest.name());
+        }
+
+        if(gymworkerUpdateRequest.email() != null
+                && gymworkerUpdateRequest.email().length() > 0) {
+            Optional<Gymworker> gymworkerOptional = gymworkerRepository
+                    .findGymworkerByEmail(gymworkerUpdateRequest.email());
+            if(gymworkerOptional.isPresent()){
+                throw new IllegalStateException("Email already registered!");
+            }
+            gymworker.setEmail(gymworkerUpdateRequest.email());
+        }
+
+        if(gymworkerUpdateRequest.password() != null
+                && gymworkerUpdateRequest.password().length() > 0) {
+            gymworker.setPassword(gymworkerUpdateRequest.password());
+        }
+
+        if(gymworkerUpdateRequest.phone() != null
+                && gymworkerUpdateRequest.phone().length() > 0) {
+            gymworker.setPhone(gymworkerUpdateRequest.phone());
+        }
+
+        if(gymworkerUpdateRequest.workingType() != null
+                && gymworkerUpdateRequest.workingType().length() > 0) {
+            gymworker.setWorkingType(gymworkerUpdateRequest.workingType());
+        }
     }
 }
