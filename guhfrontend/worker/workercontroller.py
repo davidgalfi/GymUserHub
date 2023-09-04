@@ -4,6 +4,14 @@ workerPage = Blueprint('workerPage', __name__, template_folder='templates', stat
 
 
 @workerPage.route('/')
-@workerPage.route('/home')
+@workerPage.route('/home/')
 def home():
     return render_template('worker_page.html')
+
+@workerPage.route('/userlogin/')
+def userlogin():
+    return render_template('worker_userlogin.html')
+
+@workerPage.route('/registeruser/')
+def registeruser():
+    return render_template('worker_registeruser.html')
