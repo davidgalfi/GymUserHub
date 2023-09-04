@@ -9,7 +9,7 @@ app.register_blueprint(landingPage, url_prefix='/landingPage')
 
 @app.route('/')
 def index():
-    return jsonify(requests.get('http://localhost:8080/api/gymworker/get').json())
+    return redirect(url_for('landingPage.landing'))
 
 
 if __name__ == '__main__':
