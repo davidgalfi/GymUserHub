@@ -1,6 +1,6 @@
 package com.backend.guhbackend.gymuser;
 
-import com.backend.guhbackend.utils.DailyTaskRunner;
+import com.backend.guhbackend.automate.DailyTaskRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

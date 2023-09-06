@@ -1,6 +1,6 @@
 package com.backend.guhbackend.gymworker;
 
-import jakarta.persistence.Transient;
+import com.backend.guhbackend.gymworker.dto.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

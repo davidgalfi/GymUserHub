@@ -1,4 +1,4 @@
-package com.backend.guhbackend.utils;
+package com.backend.guhbackend.automate;
 
 import com.backend.guhbackend.gymuser.Gymuser;
 import com.backend.guhbackend.gymuser.GymuserRepository;

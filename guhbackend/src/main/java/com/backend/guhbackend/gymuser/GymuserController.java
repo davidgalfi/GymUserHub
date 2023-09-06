@@ -1,5 +1,10 @@
 package com.backend.guhbackend.gymuser;
 
+import com.backend.guhbackend.exception.GymuserAlreadyRegisteredException;
+import com.backend.guhbackend.exception.InvalidTicketDateException;
+import com.backend.guhbackend.gymuser.dto.GymuserDTO;
+import com.backend.guhbackend.gymuser.dto.GymuserRegistrationRequest;
+import com.backend.guhbackend.gymuser.dto.GymuserUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +22,7 @@ public class GymuserController {
     }
 
     @GetMapping(path = "/get")
-    public List<GymuserDTO> getGymUsers(@RequestParam(required = false) Long id,@RequestParam(required = false) String email){
+    public List<GymuserDTO> getGymUsers(@RequestParam(required = false) Long id, @RequestParam(required = false) String email){
         return gymuserService.getGymUsers(id, email);
     }
 

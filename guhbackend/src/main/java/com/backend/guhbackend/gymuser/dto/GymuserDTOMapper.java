@@ -1,5 +1,6 @@
-package com.backend.guhbackend.gymuser;
+package com.backend.guhbackend.gymuser.dto;
 
+import com.backend.guhbackend.gymuser.Gymuser;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

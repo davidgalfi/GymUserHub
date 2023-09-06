@@ -1,5 +1,6 @@
-package com.backend.guhbackend.gymworker;
+package com.backend.guhbackend.gymworker.dto;
 
+import com.backend.guhbackend.gymworker.Gymworker;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
