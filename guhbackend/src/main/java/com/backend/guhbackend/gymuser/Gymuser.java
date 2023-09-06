@@ -140,8 +140,8 @@ public class Gymuser {
     }
 
     // TODO: Create a way to calculate discount
-    public void setDiscount(Byte discount) {
-        this.discount = Integer.valueOf(discount);
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     @Override

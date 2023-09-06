@@ -3,6 +3,7 @@ package com.backend.guhbackend.gymworker;
 import jakarta.persistence.Transient;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -137,5 +138,19 @@ public class GymworkerService {
                 && gymworkerUpdateRequest.workingType().length() > 0) {
             gymworker.setWorkingType(gymworkerUpdateRequest.workingType());
         }
+    }
+
+    public ResponseEntity<String> login(GymworkerLoginRequest gymworkerLoginRequest) {
+        Optional<Gymworker> gymworkerOptional =
+                gymworkerRepository.findGymworkerByEmail(gymworkerLoginRequest.email());
+
+        if(gymworkerOptional.isPresent()) {
+            Gymworker gymworker = gymworkerOptional.get();
+            if(gymworker.getPassword().equals(gymworkerLoginRequest.password())) {
+                return ResponseEntity.ok(gymworker.getEmail());
+            }
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 }

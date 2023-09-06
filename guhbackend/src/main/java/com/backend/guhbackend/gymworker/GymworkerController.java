@@ -1,6 +1,7 @@
 package com.backend.guhbackend.gymworker;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class GymworkerController {
                                 @RequestParam(required = false) String email,
                                 @RequestBody GymworkerUpdateRequest gymworkerUpdateRequest){
         gymworkerService.updateGymworker(id, email, gymworkerUpdateRequest);
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<String> login(@RequestBody GymworkerLoginRequest gymworkerLoginRequest){
+        return gymworkerService.login(gymworkerLoginRequest);
     }
 }

@@ -1,0 +1,27 @@
+{% extends 'worker_base.html' %}
+{% block title %}Login User{% endblock %}
+{% block active_loginuser%}active{% endblock %}
+{% block content %}
+    <div class="container row m-5">
+        <div class="col-3"></div>
+        <div class="col-6 justify-content-md-center">
+            <h1>Login</h1>
+            <form action="#" method="POST">
+            <div class="row">
+                <label for="email-input" class="form-label">User name</label>
+                <input type="email" class="form-control" id="email-input" name="worker_email">
+            </div>
+            <div class="row">
+                <label for="password-input" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password-input" name="worker_password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="checkbox">
+                <label class="form-check-label" for="checkbox" name="workerk_remember">Remember</label>
+            </div>
+            <button type="submit" class="btn btn-danger">Login</button>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+{% endblock %}
