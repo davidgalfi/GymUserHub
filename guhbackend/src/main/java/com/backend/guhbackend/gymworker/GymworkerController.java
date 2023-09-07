@@ -21,26 +21,26 @@ public class GymworkerController {
         this.gymworkerService = gymworkerService;
     }
 
-    @GetMapping(path = "/get")
+    @GetMapping()
     public List<GymworkerDTO> getAllGymworkers(@RequestParam(required = false) Long id,
                                                @RequestParam(required = false) String email,
                                                @RequestParam(required = false) String phone) {
         return gymworkerService.getAllGymworkers(id, email, phone);
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping()
     public void registerGymworker(@RequestBody GymworkerRegistrationRequest gymworkerRegistrationRequest){
         gymworkerService.registerGymworker(gymworkerRegistrationRequest);
     }
 
-    @DeleteMapping(path = "/delete")
+    @DeleteMapping()
     public void deleteGymworker(@RequestParam(required = false) Long id,
                                 @RequestParam(required = false) String name,
                                 @RequestParam(required = false) String email) {
         gymworkerService.deleteGymworker(id, email);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping()
     public void updateGymworker(@RequestParam(required = false) Long id,
                                 @RequestParam(required = false) String email,
                                 @RequestBody GymworkerUpdateRequest gymworkerUpdateRequest){

@@ -10,14 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Entity // Telling Java that this class is working with database
-@Table(name="gymuser") // Setting the table
+@Entity
+@Table(name="gymuser")
 public class Gymuser {
-    @Id // All rows have to be uniquely identify
+    @Id
     @SequenceGenerator(
             name = "sequence_gymuser",
             sequenceName = "sequence_gymuser",
-            allocationSize = 1 // Tells how many ID being generated in one call
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -26,15 +26,15 @@ public class Gymuser {
     private Long id;
     private String name;
     private String email;
-    private LocalDate dob; // Date of Birth
+    private LocalDate dob;
     private LocalDate registrationDate;
     @Convert(converter = ConvertingClass.class)
     private LinkedHashMap<Integer, LocalDate> purchaseDateMap;
-    @Transient // Table does not contain this data
+    @Transient
     private Integer daysAllowed;
-    @Transient // Table does not contain this data
+    @Transient
     private Integer age;
-    @Transient // Table does not contain this data
+    @Transient
     private Integer discount;
 
     public Gymuser() {
