@@ -1,4 +1,4 @@
-package com.backend.guhbackend.gymworker;
+package com.backend.guhbackend.gymworker.dto;
 
 import com.backend.guhbackend.utils.ArithmeticUtils;
 

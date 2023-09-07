@@ -1,5 +1,10 @@
 package com.backend.guhbackend.gymuser;
 
+import com.backend.guhbackend.exception.GymuserAlreadyRegisteredException;
+import com.backend.guhbackend.exception.InvalidTicketDateException;
+import com.backend.guhbackend.gymuser.dto.GymuserDTO;
+import com.backend.guhbackend.gymuser.dto.GymuserRegistrationRequest;
+import com.backend.guhbackend.gymuser.dto.GymuserUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,22 +21,22 @@ public class GymuserController {
         this.gymuserService = gymuserService;
     }
 
-    @GetMapping(path = "/get")
-    public List<GymuserDTO> getGymUsers(@RequestParam(required = false) Long id,@RequestParam(required = false) String email){
+    @GetMapping()
+    public List<GymuserDTO> getGymUsers(@RequestParam(required = false) Long id, @RequestParam(required = false) String email){
         return gymuserService.getGymUsers(id, email);
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping()
     public void registerGymUser(@RequestBody GymuserRegistrationRequest gymuserRegistrationRequest) throws GymuserAlreadyRegisteredException {
         gymuserService.registerGymUser(gymuserRegistrationRequest);
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public void deleteGymUser(@PathVariable Long id){
         gymuserService.deleteGymUser(id);
     }
 
-    @PutMapping(path = "/update/{id}")
+    @PutMapping(path = "/{id}")
     public void updateGymUser(@PathVariable Long id, @RequestBody GymuserUpdateRequest gymuserUpdateRequest)
             throws GymuserAlreadyRegisteredException, InvalidTicketDateException {
         gymuserService.updateGymUser(id, gymuserUpdateRequest);

@@ -1,5 +1,11 @@
 package com.backend.guhbackend.gymuser;
 
+import com.backend.guhbackend.exception.GymuserAlreadyRegisteredException;
+import com.backend.guhbackend.exception.InvalidTicketDateException;
+import com.backend.guhbackend.gymuser.dto.GymuserDTO;
+import com.backend.guhbackend.gymuser.dto.GymuserDTOMapper;
+import com.backend.guhbackend.gymuser.dto.GymuserRegistrationRequest;
+import com.backend.guhbackend.gymuser.dto.GymuserUpdateRequest;
 import com.backend.guhbackend.utils.ArithmeticUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
