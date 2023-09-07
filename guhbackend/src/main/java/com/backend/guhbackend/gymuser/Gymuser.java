@@ -117,7 +117,11 @@ public class Gymuser {
         return this.purchaseDateMap;
     }
     public void setPurchaseDateMap(LinkedHashMap<Integer, LocalDate> purchaseDateMap) {
-        this.purchaseDateMap.putAll(purchaseDateMap);
+        if(this.purchaseDateMap != null){
+            this.purchaseDateMap.putAll(purchaseDateMap);
+        } else {
+            this.purchaseDateMap = purchaseDateMap;
+        }
     }
     public Integer getDaysAllowed() {
         return daysAllowed;
